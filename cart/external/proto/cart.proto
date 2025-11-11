@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package cart.external.v1;
+option go_package = "protosmodule/cart/external/gen.v1;cartextv1";
+
+service CartService {
+  rpc AddToCart (AddToCartRequest) returns (CartBoolResponse);
+  rpc RemoveFromCart (RemoveFromCartRequest) returns (CartBoolResponse);
+  rpc ClearCart (ClearCartRequest) returns (CartBoolResponse);
+  rpc GetCart (GetCartRequest) returns (GetCartResponse);
+}
+
+message AddToCartRequest{
+  int64 user_id = 1;
+  string product_id = 2;
+  int32 quantity = 3;
+}
+
+message RemoveFromCartRequest{
+  int64 user_id = 1;
+  string product_id = 2;
+}
+
+message ClearCartRequest{
+  int64 user_id = 1;
+}
+
+message GetCartRequest{
+  int64 user_id = 1;
+}
+
+message CartBoolResponse {
+  bool success = 1;
+}
+
+message GetCartResponse {
+  repeated CartItem items = 1;
+  double total_price = 2;
+}
+
+message CartItem {
+  string product_id = 1;
+  string name = 2;
+  string photo = 3;
+  double price = 4;
+  int32 quantity = 5;
+}
