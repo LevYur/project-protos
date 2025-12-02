@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package prod.external.v1;
+option go_package = "protosmodule/products/external/gen/v1;prodextv1";
+
+service ProductsService {
+  rpc InfoForCart(CartInfoRequest) returns (CartInfoResponse);
+}
+
+message CartInfoRequest{
+    repeated string ids = 1;
+}
+
+message CartInfoResponse {
+  repeated CartItem items = 1;
+}
+
+message CartItem {
+  string product_id = 1;
+  string name = 2;
+  string photo = 3;
+  double price = 4;
+}

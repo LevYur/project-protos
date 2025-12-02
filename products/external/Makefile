@@ -1,0 +1,11 @@
+PROTO_DIR=proto/v1
+OUT_DIR=gen/v1
+
+generate:
+	protoc \
+		--proto_path=$(PROTO_DIR) \
+		--go_out=$(OUT_DIR) \
+		--go_opt=paths=source_relative \
+		--go-grpc_out=$(OUT_DIR) \
+		--go-grpc_opt=paths=source_relative \
+		$(PROTO_DIR)/products.proto
